@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "@mui/system";
 import FriendsListItem from "./FriendsListItem";
 import { connect } from "react-redux";
-
+import { useSelector } from "react-redux";
 const MainContainer = styled("div")({
   flexGrow: 1,
   width: "100%",
@@ -17,7 +17,8 @@ const checkOnlineUsers = (friends = [], onlineUsers = []) => {
   return friends;
 };
 
-const FriendsList = ({ friends, onlineUsers }) => {
+const FriendsList = () => {
+  const { friends, onlineUsers } = useSelector((state) => state.friends);
   return (
     <MainContainer>
       {checkOnlineUsers(friends, onlineUsers).map((f) => (
@@ -32,10 +33,11 @@ const FriendsList = ({ friends, onlineUsers }) => {
   );
 };
 
-const mapStoreStateToProps = ({ friends }) => {
-  return {
-    ...friends,
-  };
-};
+// const mapStoreStateToProps = ({ friends }) => {
+//   return {
+//     ...friends,
+//   };
+// };
 
-export default connect(mapStoreStateToProps)(FriendsList);
+// export default connect(mapStoreStateToProps)(FriendsList);
+export default FriendsList;

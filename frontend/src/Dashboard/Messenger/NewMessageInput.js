@@ -3,6 +3,7 @@ import { styled } from "@mui/system";
 import { connect } from "react-redux";
 import { sendDirectMessage } from "../../realtimeCommunication/socketConnection";
 import { useSelector } from "react-redux";
+import SendIcon from "@mui/icons-material/Send";
 const MainContainer = styled("div")({
   height: "60px",
   width: "100%",
@@ -10,7 +11,10 @@ const MainContainer = styled("div")({
   alignItems: "center",
   justifyContent: "center",
 });
-
+const InputContainer = styled("div")({
+  position: "relative",
+  width: "98%",
+});
 const Input = styled("input")({
   backgroundColor: "#2f3136",
   width: "98%",
@@ -20,6 +24,22 @@ const Input = styled("input")({
   borderRadius: "8px",
   fontSize: "14px",
   padding: "0 10px",
+});
+const SendButton = styled("button")({
+  position: "absolute",
+  top: "50%",
+  right: "10px",
+  transform: "translateY(-50%)",
+  backgroundColor: "#2f3136",
+  color: "white",
+  border: "none",
+  borderRadius: "50%",
+  width: "36px",
+  height: "36px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  cursor: "pointer",
 });
 
 const NewMessageInput = ({ chosenChatDetails }) => {
@@ -49,12 +69,17 @@ const NewMessageInput = ({ chosenChatDetails }) => {
 
   return (
     <MainContainer>
-      <Input
-        placeholder={`Write message to ${chosenChatDetails.name}`}
-        value={message}
-        onChange={handleMessageValueChange}
-        onKeyDown={handleKeyPressed}
-      />
+      <InputContainer>
+        <Input
+          placeholder={`Write message to ${chosenChatDetails.name}`}
+          value={message}
+          onChange={handleMessageValueChange}
+          onKeyDown={handleKeyPressed}
+        />
+        <SendButton onClick={handleSendMessage}>
+          <SendIcon />
+        </SendButton>
+      </InputContainer>
     </MainContainer>
   );
 };

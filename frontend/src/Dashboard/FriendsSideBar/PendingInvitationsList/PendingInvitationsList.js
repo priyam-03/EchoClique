@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "@mui/system";
 import PendingInvitationsListItem from "./PendingInvitationsListItem";
 import { connect } from "react-redux";

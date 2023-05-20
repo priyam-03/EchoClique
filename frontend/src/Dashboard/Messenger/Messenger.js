@@ -3,7 +3,7 @@ import { styled } from "@mui/system";
 import { connect } from "react-redux";
 import WelcomeMessage from "./WelcomeMessage";
 import MessengerContent from "./MessengerContent";
-
+import { useSelector } from "react-redux";
 const MainContainer = styled("div")({
   flexGrow: 1,
   backgroundColor: "#36393f",
@@ -11,8 +11,8 @@ const MainContainer = styled("div")({
   display: "flex",
 });
 
-const Messenger = ({ chosenChatDetails }) => {
-  console.log(!chosenChatDetails);
+const Messenger = () => {
+  const { chosenChatDetails } = useSelector((state) => state.chat);
   return (
     <MainContainer>
       {!chosenChatDetails ? (
@@ -24,10 +24,11 @@ const Messenger = ({ chosenChatDetails }) => {
   );
 };
 
-const mapStoreStateToProps = ({ chat }) => {
-  return {
-    ...chat,
-  };
-};
+// const mapStoreStateToProps = ({ chat }) => {
+//   return {
+//     ...chat,
+//   };
+// };
 
-export default connect(mapStoreStateToProps)(Messenger);
+// export default connect(mapStoreStateToProps)(Messenger);
+export default Messenger;

@@ -34,10 +34,14 @@ const registerSocketServer = (server) => {
     emitOnlineUsers();
 
     socket.on("direct-message", (data) => {
+      console.log("object1");
+      console.log(data);
       directMessageHandler(socket, data);
     });
 
     socket.on("direct-chat-history", (data) => {
+      console.log("object2");
+      console.log(data);
       directChatHistoryHandler(socket, data);
     });
 

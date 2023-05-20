@@ -9,7 +9,9 @@ import { combineReducers } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 const persistConfig = {
   key: "root",
+
   storage,
+  // whitelist: ["authReducer"],
 };
 const rootReducer = combineReducers({
   auth: authReducer,

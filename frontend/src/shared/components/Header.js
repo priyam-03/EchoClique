@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { logout } from "../../features/auth/authActions";
 import { setCredentials } from "../../features/auth/authSlice";
 
-// import { profile } from "../features/auth/authActions";
+// import { Dashboard } from "../features/auth/authActions";
 import "../../styles/header.css";
 
 const Header = () => {
@@ -61,7 +61,10 @@ const Header = () => {
             <NavLink to="/register">Register</NavLink>
           </>
         ) : (
-          <NavLink to="/user-profile">Profile</NavLink>
+          <>
+            <NavLink to="/user-profile">Profile</NavLink>
+            <NavLink to="/dashboard">Dashboard</NavLink>
+          </>
         )}
       </nav>
     </header>

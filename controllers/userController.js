@@ -8,7 +8,7 @@ const crypto = require("crypto");
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   const { name, email, password } = req.body;
-  console.log(req);
+  // console.log(req);
   const { originalname, path, mimetype } = req.file;
 
   const user = await User.create({
@@ -105,9 +105,9 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   const resetPasswordUrl = `${req.protocol}://localhost:3000/resetpassword/${resetToken}`;
-  console.log(resetPasswordUrl);
+  // console.log(resetPasswordUrl);
   const text = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
-  console.log(user.email);
+  // console.log(user.email);
   try {
     await sendEmail({
       mail: user.email,
@@ -132,7 +132,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 // Reset Password
 exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
   // creating token hash
-  console.log(req.params.token);
+  // console.log(req.params.token);
   const resetPasswordToken = crypto
     .createHash("sha256")
     .update(req.params.token)
