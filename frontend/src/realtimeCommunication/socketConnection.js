@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 let socket = null;
 export const connectWithSocketServer = (userInfo) => {
   const jwtToken = userInfo.token;
-  // console.log(jwtToken);
   socket = io(
     "http://localhost:4000/",
     {
@@ -31,7 +30,6 @@ export const connectWithSocketServer = (userInfo) => {
 
   socket.on("friends-list", (data) => {
     const { friends } = data;
-    // console.log("frined_lsit from server" + data);
     store.dispatch(setFriends(friends));
   });
 
@@ -42,8 +40,6 @@ export const connectWithSocketServer = (userInfo) => {
   });
 
   socket.on("direct-chat-history", (data) => {
-    // console.log("chat comming");
-    // console.log(data);
     UpdateDirectChatHistoryIfActive(data);
   });
   socket.on("friends-invitations", (data) => {
@@ -51,32 +47,21 @@ export const connectWithSocketServer = (userInfo) => {
     store.dispatch(setPendingFriendsInvitations(pendingInvitations));
   });
 };
-// }, [userInfo]);
-// connectWithSocketServer();
 
 export const sendDirectMessage = (data) => {
   if (socket) {
-    // console.log(data);
     socket.emit("direct-message", data);
   }
 };
 
 export const getDirectChatHistory = (data) => {
   if (socket) {
-    // console.log(data);
     socket.emit("direct-chat-history", data);
   }
 };
 
 export const disconnect = () => {
   if (socket) {
-    // console.log(data);
     socket.disconnect();
   }
 };
-// };
-// export default {
-//   connectWithSocketServer,
-//   sendDirectMessage,
-//   getDirectChatHistory,
-// };

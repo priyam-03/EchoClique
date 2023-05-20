@@ -22,8 +22,6 @@ const Dashboard = () => {
   const { userInfo } = useSelector((state) => state.auth);
   console.log(userInfo);
   useEffect(() => {
-    // const userDetails = localStorage.getItem("user");
-    console.log("called__new user added clientside");
     connectWithSocketServer(userInfo);
     return () => {
       disconnect();
@@ -39,12 +37,4 @@ const Dashboard = () => {
     </Wrapper>
   );
 };
-
-// const mapActionsToProps = (dispatch) => {
-//   return {
-//     ...getActions(dispatch),
-//   };
-// };
-
-// export default connect(null, mapActionsToProps)(Dashboard);
 export default Dashboard;
