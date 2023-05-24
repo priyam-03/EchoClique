@@ -24,6 +24,7 @@
     "nodemailer": "^6.9.0",
     "path": "^0.12.7",
     "socket.io": "^4.6.1",
+    "uuid": "^9.0.0",
     "validator": "^13.7.0"
   },
   "devDependencies": {

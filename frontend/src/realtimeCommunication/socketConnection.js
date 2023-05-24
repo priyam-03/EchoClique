@@ -6,8 +6,9 @@ import {
 } from "../store/actions/friendsActions";
 import { store } from "../store/store";
 import { UpdateDirectChatHistoryIfActive } from "../shared/utils/chat";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import * as roomHandler from "./roomHandler";
+import * as webRTCHandler from "./webRTCHandler";
+
 let socket = null;
 export const connectWithSocketServer = (userInfo) => {
   const jwtToken = userInfo.token;
@@ -46,6 +47,33 @@ export const connectWithSocketServer = (userInfo) => {
     const { pendingInvitations } = data;
     store.dispatch(setPendingFriendsInvitations(pendingInvitations));
   });
+  socket.on("room-create", (data) => {
+    roomHandler.newRoomCreated(data);
+  });
+
+  socket.on("active-rooms", (data) => {
+    roomHandler.updateActiveRooms(data);
+  });
+
+  socket.on("conn-prepare", (data) => {
+    const { connUserSocketId } = data;
+    webRTCHandler.prepareNewPeerConnection(connUserSocketId, false);
+    socket.emit("conn-init", { connUserSocketId: connUserSocketId });
+  });
+
+  socket.on("conn-init", (data) => {
+    const { connUserSocketId } = data;
+    webRTCHandler.prepareNewPeerConnection(connUserSocketId, true);
+  });
+
+  socket.on("conn-signal", (data) => {
+    webRTCHandler.handleSignalingData(data);
+  });
+
+  socket.on("room-participant-left", (data) => {
+    console.log("user left room");
+    webRTCHandler.handleParticipantLeftRoom(data);
+  });
 };
 
 export const sendDirectMessage = (data) => {
@@ -64,4 +92,19 @@ export const disconnect = () => {
   if (socket) {
     socket.disconnect();
   }
+};
+export const createNewRoom = () => {
+  socket.emit("room-create");
+};
+
+export const joinRoom = (data) => {
+  socket.emit("room-join", data);
+};
+
+export const leaveRoom = (data) => {
+  socket.emit("room-leave", data);
+};
+
+export const signalPeerData = (data) => {
+  socket.emit("conn-signal", data);
 };
