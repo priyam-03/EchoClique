@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { IconButton } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { MoreVert } from "@mui/icons-material/MoreVert";
 import { logout } from "../../features/auth/authActions";
 import { useDispatch, useSelector } from "react-redux";
 export default function BasicMenu() {
@@ -21,7 +21,7 @@ export default function BasicMenu() {
   return (
     <div>
       <IconButton onClick={handleMenuOpen} style={{ color: "white" }}>
-        <MoreVertIcon />
+        <MoreVert />
       </IconButton>
       <Menu
         id="basic-menu"
