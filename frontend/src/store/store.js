@@ -13,7 +13,7 @@ const persistConfig = {
 
   storage,
   // whitelist: ["authReducer"],
-  blacklist: ["room"],
+  whiteklist: ["auth"],
 };
 const rootReducer = combineReducers({
   auth: authReducer,

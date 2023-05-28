@@ -1,6 +1,6 @@
 import React from "react";
-import CheckIcon from "@mui/icons-material/Check";
-import ClearIcon from "@mui/icons-material/Clear";
+import { Check, Clear } from "@mui/icons-material";
+// import ClearIcon from "@mui/icons-material/Clear";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 
@@ -16,14 +16,14 @@ const InvitationDecisionButtons = ({
         disabled={disabled}
         onClick={acceptInvitationHandler}
       >
-        <CheckIcon />
+        <Check />
       </IconButton>
       <IconButton
         style={{ color: "white" }}
         disabled={disabled}
         onClick={rejectInvitationHandler}
       >
-        <ClearIcon />
+        <Clear />
       </IconButton>
     </Box>
   );
