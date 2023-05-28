@@ -4,21 +4,22 @@ import SideBar from "./SideBar/SideBar";
 import FriendsSideBar from "./FriendsSideBar/FriendsSideBar";
 import Messenger from "./Messenger/Messenger";
 import AppBar from "./AppBar/AppBar";
+
+import { connect } from "react-redux";
+
 import { useSelector } from "react-redux";
-// import { connect } from "react-redux";
-// import { getActions } from "../store/actions/authActions";
 import {
   connectWithSocketServer,
   disconnect,
 } from "../realtimeCommunication/socketConnection";
-
+import Room from "./Room/Room";
 const Wrapper = styled("div")({
   width: "100%",
   height: "100vh",
   display: "flex",
 });
 
-const Dashboard = () => {
+const Dashboard = ({ isUserInRoom }) => {
   const { userInfo } = useSelector((state) => state.auth);
   console.log(userInfo);
   useEffect(() => {
@@ -34,7 +35,13 @@ const Dashboard = () => {
       <FriendsSideBar />
       <Messenger />
       <AppBar />
+      {isUserInRoom && <Room />}
     </Wrapper>
   );
 };
-export default Dashboard;
+const mapStoreStateToProps = ({ room }) => {
+  return {
+    ...room,
+  };
+};
+export default connect(mapStoreStateToProps)(Dashboard);

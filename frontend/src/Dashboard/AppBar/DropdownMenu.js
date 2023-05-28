@@ -6,7 +6,8 @@ import { IconButton } from "@mui/material";
 import { MoreVert } from "@mui/icons-material/MoreVert";
 import { logout } from "../../features/auth/authActions";
 import { useDispatch, useSelector } from "react-redux";
-export default function BasicMenu() {
+import { connect } from "react-redux";
+const BasicMenu = ({ audioOnly, setAudioOnly }) => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -16,6 +17,10 @@ export default function BasicMenu() {
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleAudioOnlyChange = () => {
+    setAudioOnly(!audioOnly);
   };
 
   return (
@@ -32,10 +37,19 @@ export default function BasicMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <button className="button" onClick={() => dispatch(logout())}>
+        <MenuItem className="button" onClick={() => dispatch(logout())}>
           Logout
-        </button>
+        </MenuItem>
+        <MenuItem onClick={handleAudioOnlyChange}>
+          {audioOnly ? "Audio Only Enabled" : "Audio Only Disabled"}
+        </MenuItem>
       </Menu>
     </div>
   );
-}
+};
+const mapStoreStateToProps = ({ room }) => {
+  return {
+    ...room,
+  };
+};
+export default connect(mapStoreStateToProps)(BasicMenu);
