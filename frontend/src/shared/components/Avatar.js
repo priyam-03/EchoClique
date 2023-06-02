@@ -15,10 +15,14 @@ const AvatarPreview = styled("div")({
   color: "white",
 });
 
-const Avatar = ({ username, large }) => {
+const Avatar = ({ avatar, large }) => {
   return (
-    <AvatarPreview style={large ? { height: "80px", width: "80px" } : {}}>
-      {username.substring(0, 2)}
+    <AvatarPreview>
+      <img
+        className="profile-image"
+        src={`http://localhost:4000/${avatar.filePath}`}
+        alt="img"
+      />
     </AvatarPreview>
   );
 };
