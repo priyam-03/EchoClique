@@ -15,7 +15,7 @@ const AvatarPreview = styled("div")({
   color: "white",
 });
 
-const Avatar = ({ avatar, large }) => {
+const Avatar = ({ avatar }) => {
   return (
     <AvatarPreview>
       <img
