@@ -25,6 +25,12 @@ const userSchema = new mongoose.Schema(
       select: false,
     },
     friends: [{ type: Schema.Types.Object, ref: "Userauth" }],
+    clusters: [
+      {
+        name: { type: String },
+        friendlist: [{ type: Schema.Types.Object, ref: "Userauth" }],
+      },
+    ],
     avatar: {
       fileName: {
         type: String,

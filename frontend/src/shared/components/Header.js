@@ -63,7 +63,8 @@ const Header = () => {
         ) : (
           <>
             <NavLink to="/user-profile">Profile</NavLink>
-            <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink to="/dashboard">Personal Chat</NavLink>
+            <NavLink to="/cluster">Cluster Chat</NavLink>
           </>
         )}
       </nav>
