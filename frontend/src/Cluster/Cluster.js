@@ -8,12 +8,19 @@ import {
 } from "../realtimeCommunication/socketConnection";
 import { profile } from "../features/auth/authActions";
 import ClusterMessageDialogue from "./ClusterMessageDialogue";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+
+import IconButton from "@mui/material/IconButton";
+import SendIcon from "@mui/icons-material/Send";
 const additionalStyles = {
   marginTop: "10px",
   marginLeft: "5px",
-  width: "80%",
+  width: "100%",
   height: "30px",
   background: "#3ba55d",
+  display: "inline-block",
 };
 
 const Cluster = () => {
@@ -49,32 +56,48 @@ const Cluster = () => {
   };
 
   return (
-    <>
+    <div>
       <CustomPrimaryButton
         additionalStyles={additionalStyles}
-        label="Add Cluster"
+        label="Add New Cluster"
         onClick={handleOpenAddClusterDialog}
       />
       <ClusterDialog
         isDialogOpen={isDialogOpen}
         closeDialogHandler={handleCloseAddClusterDialog}
       />
-      <ul>
+      <h2>All the clusters are ....</h2>
+      <List
+        sx={{
+          width: "100%",
+          maxWidth: 360,
+          bgcolor: "background.paper",
+        }}
+      >
         {userInfo.user.clusters.length > 0 &&
-          userInfo.user.clusters.map((c) => {
-            return (
-              <button key={c._id} onClick={() => handleOpenMessageDialog(c)}>
-                {c.name}
-              </button>
-            );
-          })}
-      </ul>
+          userInfo.user.clusters.map((c) => (
+            <ListItem
+              key={c._id}
+              disableGutters
+              secondaryAction={
+                <IconButton
+                  aria-label="comment"
+                  onClick={() => handleOpenMessageDialog(c)}
+                >
+                  <SendIcon />
+                </IconButton>
+              }
+            >
+              <ListItemText primary={` ${c.name}`} />
+            </ListItem>
+          ))}
+      </List>
       <ClusterMessageDialogue
         isMessageDialogOpen={isMessageDialogOpen}
         cluster={cluster}
         closeMessageDialogHandler={handleCloseMessageDialog}
       />
-    </>
+    </div>
   );
 };
 

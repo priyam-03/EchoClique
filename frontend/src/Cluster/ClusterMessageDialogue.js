@@ -59,6 +59,7 @@ const ClusterMessageDialogue = ({
   };
 
   const handleSendMessage = () => {
+    console.log(cluster.friendlist);
     if (message.length > 0 && cluster.friendlist.length > 0) {
       cluster.friendlist.map((f) =>
         sendDirectMessage({
@@ -77,11 +78,9 @@ const ClusterMessageDialogue = ({
         <DialogContent>
           {/* <InputContainer> */}
           <InputWithLabel
-            label="name"
             type="text"
             setValue={setMessage}
-            // placeholder={`Write message to cluster ${cluster.name}`}
-            // onKeyDown={handleKeyPressed}
+            placeholder={`Write message to ${cluster.name}`}
           />
           {/* <Input
               placeholder={`Write message to cluster ${cluster.name}`}
