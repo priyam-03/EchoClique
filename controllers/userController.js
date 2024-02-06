@@ -4,7 +4,7 @@ const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
-
+const { ObjectId } = require("mongodb");
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -240,6 +240,23 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
   });
+});
+exports.addCluster = catchAsyncErrors(async (req, res, next) => {
+  try {
+    req.body.newCluster.map((c) => {
+      return new ObjectId(c);
+    });
+    const newCluster = { friendlist: req.body.newCluster, name: req.body.name };
+    console.log(newCluster);
+    user = await User.findById(req.user.id);
+    user.clusters.push(newCluster);
+    await user.save();
+    res.status(200).json({
+      success: true,
+    });
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 // Delete User --Admin

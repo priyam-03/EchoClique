@@ -10,6 +10,7 @@ import { getActions } from "../../../store/actions/roomActions";
 const MainContainer = styled("div")({
   height: "15%",
   width: "100%",
+  // position: "absolute",
   backgroundColor: "#5865f2",
   borderTopLeftRadius: "8px",
   borderTopRightRadius: "8px",

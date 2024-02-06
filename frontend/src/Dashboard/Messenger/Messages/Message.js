@@ -31,7 +31,7 @@ const SameAuthorMessageText = styled("span")({
   marginLeft: "70px",
 });
 
-const Message = ({ content, sameAuthor, username, date, sameDay }) => {
+const Message = ({ avatar, content, sameAuthor, username, date, sameDay }) => {
   if (sameAuthor && sameDay) {
     return (
       <SameAuthorMessageContent>
@@ -43,7 +43,7 @@ const Message = ({ content, sameAuthor, username, date, sameDay }) => {
   return (
     <MainContainer>
       <AvatarContainer>
-        <Avatar username={username} />
+        <Avatar avatar={avatar} />
       </AvatarContainer>
       <MessageContainer>
         <Typography style={{ fontSize: "16px", color: "white" }}>

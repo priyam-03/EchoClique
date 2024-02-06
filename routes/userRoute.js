@@ -13,7 +13,7 @@ const {
   getSingleUser,
   updateUserRole,
   deleteUser,
-  test,
+  addCluster,
 } = require("../controllers/userController");
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 
@@ -46,5 +46,5 @@ router
 //   .get(isAuthenticatedUser, authorizeRoles("admin"), getSingleUser)
 //   .put(isAuthenticatedUser, authorizeRoles("admin"), updateUserRole)
 //   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);
-
+router.route("/addCluster").post(isAuthenticatedUser, addCluster);
 module.exports = router;

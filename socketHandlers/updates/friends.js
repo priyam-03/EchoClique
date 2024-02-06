@@ -31,7 +31,7 @@ const updateFriends = async (userId) => {
     if (receiverList.length > 0) {
       const user = await User.findById(userId, { _id: 1, friends: 1 }).populate(
         "friends",
-        "_id name email"
+        "_id name email avatar"
       );
 
       if (user) {
@@ -40,6 +40,7 @@ const updateFriends = async (userId) => {
             id: f._id,
             mail: f.email,
             username: f.name,
+            avatar: f.avatar,
           };
         });
 

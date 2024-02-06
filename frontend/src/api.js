@@ -93,6 +93,27 @@ export const rejectFriendInvitation = async (data) => {
   }
 };
 
+export const addCluster = async (data) => {
+  console.log(data);
+  try {
+    return await axios.post(
+      "/api/v1/addCluster",
+      data,
+      { withCredentials: true },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  } catch (exception) {
+    return {
+      error: true,
+      exception,
+    };
+  }
+};
+
 // const checkResponseCode = (exception) => {
 //   const responseCode = exception?.response?.status;
 

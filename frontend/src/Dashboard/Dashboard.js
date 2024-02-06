@@ -21,7 +21,7 @@ const Wrapper = styled("div")({
 
 const Dashboard = ({ isUserInRoom }) => {
   const { userInfo } = useSelector((state) => state.auth);
-  console.log(userInfo);
+
   useEffect(() => {
     connectWithSocketServer(userInfo);
     return () => {

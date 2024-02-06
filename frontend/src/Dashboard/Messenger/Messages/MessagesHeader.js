@@ -9,10 +9,10 @@ const MainContainer = styled("div")({
   marginTop: "10px",
 });
 
-const MessagesHeader = ({ name = "" }) => {
+const MessagesHeader = ({ avatar = {}, name = "" }) => {
   return (
     <MainContainer>
-      <Avatar large username={name} />
+      <Avatar avatar={avatar} />
       <Typography
         variant="h4"
         sx={{
