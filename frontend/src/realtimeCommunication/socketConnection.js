@@ -3,15 +3,21 @@ import {
   setPendingFriendsInvitations,
   setFriends,
   setOnlineUsers,
+  setGroup,
 } from "../store/actions/friendsActions";
 import { store } from "../store/store";
-import { UpdateDirectChatHistoryIfActive } from "../shared/utils/chat";
+import {
+  UpdateDirectChatHistoryIfActive,
+  UpdateGroupChatHistoryIfActive,
+} from "../shared/utils/chat";
 import * as roomHandler from "./roomHandler";
 import * as webRTCHandler from "./webRTCHandler";
+import { getGroup } from "../api";
 
 let socket = null;
 export const connectWithSocketServer = (userInfo) => {
   const jwtToken = userInfo.token;
+
   socket = io(
     "http://localhost:4000/",
     {
@@ -31,6 +37,7 @@ export const connectWithSocketServer = (userInfo) => {
 
   socket.on("friends-list", (data) => {
     const { friends } = data;
+    console.log(friends, "friends");
     store.dispatch(setFriends(friends));
   });
 
@@ -41,7 +48,12 @@ export const connectWithSocketServer = (userInfo) => {
   });
 
   socket.on("direct-chat-history", (data) => {
+    console.log(data);
     UpdateDirectChatHistoryIfActive(data);
+  });
+  socket.on("group-chat-history", (data) => {
+    console.log(data);
+    UpdateGroupChatHistoryIfActive(data);
   });
   socket.on("friends-invitations", (data) => {
     const { pendingInvitations } = data;
@@ -82,10 +94,22 @@ export const sendDirectMessage = (data) => {
     socket.emit("direct-message", data);
   }
 };
+export const sendGroupMessage = (data) => {
+  if (socket) {
+    console.log(data);
+    socket.emit("group-message", data);
+  }
+};
 
 export const getDirectChatHistory = (data) => {
+  console.log(data);
   if (socket) {
     socket.emit("direct-chat-history", data);
+  }
+};
+export const getGroupChatHistory = (data) => {
+  if (socket) {
+    socket.emit("group-chat-history", data);
   }
 };
 

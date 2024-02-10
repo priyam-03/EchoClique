@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { styled } from "@mui/system";
 import { connect } from "react-redux";
-import { sendDirectMessage } from "../../realtimeCommunication/socketConnection";
+import {
+  sendDirectMessage,
+  sendGroupMessage,
+} from "../../realtimeCommunication/socketConnection";
 import { useSelector } from "react-redux";
 import SendIcon from "@mui/icons-material/Send";
 const MainContainer = styled("div")({
@@ -42,7 +45,7 @@ const SendButton = styled("button")({
   cursor: "pointer",
 });
 
-const NewMessageInput = ({ chosenChatDetails }) => {
+const NewMessageInput = ({ chosenChatDetails, chatType }) => {
   // const { userInfo } = useSelector((state) => state.auth);
   // const { receiverInfo } = useSelector((state) => state.chat);
   const [message, setMessage] = useState("");
@@ -59,10 +62,17 @@ const NewMessageInput = ({ chosenChatDetails }) => {
 
   const handleSendMessage = () => {
     if (message.length > 0) {
-      sendDirectMessage({
-        receiverUserId: chosenChatDetails.id,
-        content: message,
-      });
+      if (chatType == "DIRECT") {
+        sendDirectMessage({
+          receiverUserId: chosenChatDetails.id,
+          content: message,
+        });
+      } else {
+        sendGroupMessage({
+          conversationId: chosenChatDetails.id,
+          content: message,
+        });
+      }
       setMessage("");
     }
   };

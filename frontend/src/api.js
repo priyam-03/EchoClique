@@ -113,6 +113,37 @@ export const addCluster = async (data) => {
     };
   }
 };
+export const addGroup = async (data) => {
+  console.log(data);
+  try {
+    const data1 = await axios.post(
+      "/api/v1/addGroup",
+      data,
+      { withCredentials: true },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(data1);
+  } catch (exception) {
+    return {
+      error: true,
+      exception,
+    };
+  }
+};
+export const getGroup = async () => {
+  try {
+    return await axios.get("/api/v1/getGroup", { withCredentials: true });
+  } catch (exception) {
+    return {
+      error: true,
+      exception,
+    };
+  }
+};
 
 // const checkResponseCode = (exception) => {
 //   const responseCode = exception?.response?.status;

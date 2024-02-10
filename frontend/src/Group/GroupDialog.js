@@ -6,16 +6,18 @@ import { DialogContent, DialogContentText, Checkbox } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import CustomPrimaryButton from "../shared/components/CustomPrimaryButton";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { addCluster } from "../api";
+
 import { useSelector } from "react-redux";
 import InputWithLabel from "../shared/components/InputWithLabel";
-const ClusterDialog = ({ isDialogOpen, closeDialogHandler }) => {
+import { addGroup } from "../api";
+const GroupDialog = ({ isDialogOpen, closeDialogHandler }) => {
   const [selectedFields, setSelectedFields] = useState([]);
   const [name, setName] = useState("");
   const { friends } = useSelector((state) => state.friends);
 
   const handleFrinedSelected = async () => {
-    await addCluster({
+    console.log(selectedFields);
+    await addGroup({
       name: name,
       newCluster: selectedFields,
     });
@@ -43,7 +45,7 @@ const ClusterDialog = ({ isDialogOpen, closeDialogHandler }) => {
       <Dialog open={isDialogOpen} onClose={handleCloseDialog}>
         <DialogContent>
           <DialogContentText>
-            <Typography>Enter name of the cluster</Typography>
+            <Typography>Enter name of the group</Typography>
           </DialogContentText>
           <InputWithLabel
             label="name"
@@ -86,4 +88,4 @@ const ClusterDialog = ({ isDialogOpen, closeDialogHandler }) => {
   );
 };
 
-export default ClusterDialog;
+export default GroupDialog;

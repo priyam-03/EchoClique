@@ -3,7 +3,7 @@ const roomsUpdate = require("./updates/rooms");
 
 const roomLeaveHandler = (socket, data) => {
   const { roomId } = data;
-
+  console.log(data);
   const activeRoom = serverStore.getActiveRoom(roomId);
 
   if (activeRoom) {

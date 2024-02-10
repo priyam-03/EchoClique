@@ -39,7 +39,7 @@ const PendingInvitationsListItem = ({
             justifyContent: "space-between",
           }}
         >
-          <Avatar username={username} />
+          {/* <Avatar username={username} /> */}
           <Typography
             sx={{
               marginLeft: "7px",
