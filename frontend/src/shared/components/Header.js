@@ -4,23 +4,33 @@ import { NavLink } from "react-router-dom";
 // import { useGetDetailsQuery } from "../app/services/auth/authService";
 import { logout } from "../../features/auth/authActions";
 import { setCredentials } from "../../features/auth/authSlice";
-
+// import { store } from "../store/store";
+import { store } from "../../store/store";
+// import { connect } from "react-redux";
+import { getGroup } from "../../api";
+import { setGroup } from "../../store/actions/friendsActions";
 // import { Dashboard } from "../features/auth/authActions";
 import "../../styles/header.css";
 
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+
   console.log(userInfo);
   // dispatch(profile());
   // automatically authenticate user if token is found
   // const { data, isFetching } = useGetDetailsQuery("userDetails", {
   //   pollingInterval: 900000, // 15mins
   // });
-
-  // useEffect(() => {
-  //   if (data) dispatch(setCredentials(data));
-  // }, [data, dispatch]);
+  const dispatch = useDispatch();
+  // const fetch = async () => {
+  //   const group = await getGroup();
+  //   console.log("group" + group);
+  //   store.dispatch(setGroup(group));
+  // };
+  useEffect(() => {
+    // Dispatch the setGroup action when the component mounts
+    dispatch(setGroup());
+  }, [dispatch]); // Ensure dispatch is added as a dependency
 
   return (
     <header>
@@ -65,6 +75,7 @@ const Header = () => {
             <NavLink to="/user-profile">Profile</NavLink>
             <NavLink to="/dashboard">Personal Chat</NavLink>
             <NavLink to="/cluster">Cluster Chat</NavLink>
+            <NavLink to="/group">New Group</NavLink>
           </>
         )}
       </nav>

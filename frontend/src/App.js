@@ -17,6 +17,7 @@ import ResetPassword from "./screens/ResetPassword";
 import Dashboard from "./Dashboard/Dashboard";
 import AlertNotification from "./shared/components/AlertNotification";
 import Cluster from "./Cluster/Cluster";
+import Group from "./Group/Group";
 import "./App.css";
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
               <Route path="/updateProfile" element={<UpdateProfileScreen />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/cluster" element={<Cluster />} />
+              <Route path="/group" element={<Group />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

@@ -8,7 +8,8 @@ const roomJoinHandler = require("./socketHandlers/roomJoinHandler");
 const roomLeaveHandler = require("./socketHandlers/roomLeaveHandler");
 const roomInitializeConnectionHandler = require("./socketHandlers/roomInitializeConnectionHandler");
 const roomSignalingDataHandler = require("./socketHandlers/roomSignalingDataHandler");
-
+const groupMessageHandler = require("./socketHandlers/groupMessageHandler");
+const groupChatHistoryHandler = require("./socketHandlers/groupChatHistoryHandler");
 const serverStore = require("./serverStore");
 
 const registerSocketServer = (server) => {
@@ -48,6 +49,17 @@ const registerSocketServer = (server) => {
       console.log("object2");
       console.log(data);
       directChatHistoryHandler(socket, data);
+    });
+
+    socket.on("group-message", (data) => {
+      console.log("object3");
+      console.log(data);
+      groupMessageHandler(socket, data);
+    });
+    socket.on("group-chat-history", (data) => {
+      console.log("object4");
+      console.log(data);
+      groupChatHistoryHandler(socket, data);
     });
     socket.on("room-create", () => {
       roomCreateHandler(socket);

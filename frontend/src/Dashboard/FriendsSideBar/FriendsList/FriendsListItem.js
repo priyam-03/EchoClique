@@ -1,9 +1,16 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import Avatar from "../../../shared/components/Avatar";
+import { useDispatch } from "react-redux";
+
 import Typography from "@mui/material/Typography";
 import OnlineIndicator from "./OnlineIndicator";
-import { chatTypes, getActions } from "../../../store/actions/chatActions";
+import {
+  chatTypes,
+  getActions,
+  setChosenChatDetails,
+} from "../../../store/actions/chatActions";
+
 import { connect } from "react-redux";
 
 const FriendsListItem = ({
@@ -12,9 +19,17 @@ const FriendsListItem = ({
   avatar,
   isOnline,
   setChosenChatDetails,
+  type,
 }) => {
   const handleChooseActiveConversation = () => {
-    setChosenChatDetails({ id: id, name: username }, chatTypes.DIRECT);
+    if (type == "friend") {
+      setChosenChatDetails(
+        { id: id, name: username, avatar: avatar },
+        chatTypes.DIRECT
+      );
+    } else {
+      setChosenChatDetails({ id: id, name: username }, chatTypes.GROUP);
+    }
   };
 
   return (
@@ -32,7 +47,7 @@ const FriendsListItem = ({
         position: "relative",
       }}
     >
-      <Avatar avatar={avatar} />
+      {/* <Avatar avatar={avatar} /> */}
       <Typography
         style={{
           marginLeft: "7px",

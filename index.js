@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const socketServer = require("./socketServer");
-
+const group = require("./routes/groupRoutes");
 const errorMiddleware = require("./middleware/error");
 
 // Config
@@ -29,6 +29,7 @@ app.set("trust proxy", 1);
 const user = require("./routes/userRoute");
 const friendInvitationRoutes = require("./routes/friendInvitationRoutes");
 app.use("/api/v1", user);
+app.use("/api/v1", group);
 app.use("/api/friend-invitation", friendInvitationRoutes);
 const server = http.createServer(app);
 socketServer.registerSocketServer(server);

@@ -1,7 +1,6 @@
 import React from "react";
 import { styled } from "@mui/system";
 import FriendsListItem from "./FriendsListItem";
-import { connect } from "react-redux";
 import { useSelector } from "react-redux";
 const MainContainer = styled("div")({
   flexGrow: 1,
@@ -18,7 +17,8 @@ const checkOnlineUsers = (friends = [], onlineUsers = []) => {
 };
 
 const FriendsList = () => {
-  const { friends, onlineUsers } = useSelector((state) => state.friends);
+  const { friends, onlineUsers, group } = useSelector((state) => state.friends);
+  // console.log(group, "group");
   return (
     <MainContainer>
       {checkOnlineUsers(friends, onlineUsers).map((f) => (
@@ -28,6 +28,16 @@ const FriendsList = () => {
           key={f.id}
           avatar={f.avatar}
           isOnline={f.isOnline}
+          type="friend"
+        />
+      ))}
+      {group.map((g) => (
+        <FriendsListItem
+          username={g.name}
+          id={g._id}
+          key={g._id}
+          isOnline={false}
+          type="group"
         />
       ))}
     </MainContainer>

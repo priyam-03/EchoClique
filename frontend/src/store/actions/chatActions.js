@@ -17,6 +17,7 @@ export const getActions = (dispatch) => {
 };
 
 export const setChosenChatDetails = (chatDetails, type) => {
+  console.log(chatDetails);
   return {
     type: chatActions.SET_CHOSEN_CHAT_DETAILS,
     chatType: type,

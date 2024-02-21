@@ -4,6 +4,7 @@ const initState = {
   friends: [],
   pendingFriendsInvitations: [],
   onlineUsers: [],
+  group: [],
 };
 
 const reducer = (state = initState, action) => {
@@ -22,6 +23,11 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         onlineUsers: action.onlineUsers,
+      };
+    case friendsActions.SET_GROUP:
+      return {
+        ...state,
+        group: action.group,
       };
     default:
       return state;

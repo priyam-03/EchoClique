@@ -12,14 +12,13 @@ const MainContainer = styled("div")({
 });
 
 const Messenger = () => {
-  const { chosenChatDetails } = useSelector((state) => state.chat);
+  const data = useSelector((state) => state.chat);
+
+  const { chosenChatDetails, chatType } = data;
+  console.log(typeof chatType);
   return (
     <MainContainer>
-      {!chosenChatDetails ? (
-        <WelcomeMessage />
-      ) : (
-        <MessengerContent chosenChatDetails={chosenChatDetails} />
-      )}
+      {!chosenChatDetails ? <WelcomeMessage /> : <MessengerContent />}
     </MainContainer>
   );
 };
